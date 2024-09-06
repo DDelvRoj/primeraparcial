@@ -25,7 +25,7 @@ const AsyncStorageParcial04 = () => {
         setEditarAlumno(null); // Salir del modo edición
       } else {
         // Modo agregar nuevo alumno
-        const newAlumno = { codigo, carrera };
+        const newAlumno = { codigo, carrera, facultad };
         const nuevoAlumnos = [...alumnos, newAlumno];
         await AsyncStorage.setItem('alumnos', JSON.stringify(nuevoAlumnos));
         setAlumnos(nuevoAlumnos);
@@ -53,6 +53,7 @@ const AsyncStorageParcial04 = () => {
   const editarAlumnos = (alumno) => {
     setCodigo(alumno.codigo);
     setCarrera(alumno.carrera);
+    setFacultad(alumno.facultad);
     setEditarAlumno(alumno.carrera);
   }
 
@@ -92,7 +93,7 @@ const AsyncStorageParcial04 = () => {
         keyExtractor={(item) => item.carrera}
         renderItem={({ item }) => (
           <View style={styles.alumnoContainer}>
-            <Text style={styles.alumnoContainerText}>{item.codigo} - {item.carrera}</Text>
+            <Text style={styles.alumnoContainerText}>{item.codigo} - {item.carrera} - {item.facultad}</Text>
             <View style={styles.buttonContainer}>
               <TouchableOpacity style={styles.button} onPress={() => editarAlumnos(item)}>
                 <Text style={styles.buttonText}>Editar</Text>
